@@ -14,7 +14,7 @@ defaults:
     working-directory: parent
 jobs:
   init-plan-fmt-apply:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
 
       - name: Checkout

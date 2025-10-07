@@ -8,13 +8,16 @@ on:
 permissions:
   id-token: write
 
-# defaults:
-#   run:
-#     working-directory: parent
+defaults:
+  run:
+    working-directory: parent
 jobs:
   init-plan-fmt-apply:
     runs-on: self-hosted
     steps:
+
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
     
       - name: Azure Login
         uses: Azure/login@v2.3.0
@@ -41,27 +44,22 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        # working-directory: parent
 
       - name: Terraform FMT
         run: terraform fmt
         continue-on-error: true
-        working-directory: parent
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        working-directory: parent
       
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
         continue-on-error: true
-        working-directory: parent
 
       - name: Terraform Apply
         id: apply
         run: terraform apply -auto-approve
-        working-directory: parent
 
       

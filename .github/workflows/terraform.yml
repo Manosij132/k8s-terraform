@@ -41,7 +41,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: parent
+        # working-directory: parent
 
       - name: Terraform FMT
         run: terraform fmt

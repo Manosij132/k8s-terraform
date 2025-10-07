@@ -1,0 +1,9 @@
+variable "rg-name" {}
+variable "location" {}
+variable "aks-name" {}
+variable "dns-prefix" {}
+variable "pool-name" {}
+variable "node-count" {}
+variable "vm-size" {}
+variable "acr-name" {}
+variable "sku" {}

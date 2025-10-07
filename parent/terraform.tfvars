@@ -1,0 +1,9 @@
+rg-name    = "rg-k8smano"
+location   = "eastasia"
+aks-name   = "manocluster"
+dns-prefix = "manocluster"
+pool-name  = "agentpool"
+node-count = 1
+vm-size    = "standard_a2m_v2"
+acr-name   = "manoacr6163"
+sku        = "Standard"

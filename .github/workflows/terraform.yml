@@ -19,7 +19,10 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v5.0.0
-    
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+                 
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:

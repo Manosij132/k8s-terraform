@@ -7,26 +7,33 @@ on:
       
 permissions:
   id-token: write
+  contents: read
 
-# defaults:
-#   run:
-#     working-directory: parent
+defaults:
+  run:
+    working-directory: parent
 jobs:
   init-plan-fmt-apply:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
-    
+
+      - name: Checkout
+        uses: actions/checkout@v5.0.0
+
+      - name: HashiCorp - Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.3
+                 
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
           # # Paste output of `az ad sp create-for-rbac` as value of secret variable: AZURE_CREDENTIALS
           # creds: # optional
           # # ClientId of the Azure Service principal created.
-          client-id: 4389780a-c0d6-40ff-ba18-cf2728155c66 # optional
+          client-id: d4bc3dd5-ac8c-43a2-bb54-79e0a1f7d8ed # optional
           # TenantId of the Azure Service principal created.
-          tenant-id: 3f024170-9837-48ba-a8f4-088d76095ad3 # optional
+          tenant-id: 81c83f06-4c13-4757-9b94-36ce6d08c87a # optional
           # Azure subscriptionId
-          subscription-id: a042c51a-bb9d-48f6-af09-55adf40d7a98 # optional
+          subscription-id: 90ba3f99-29ea-4a71-8106-8a6775ca9f61 # optional
           # # Set this value to true to enable Azure PowerShell Login in addition to Azure CLI login
           # enable-AzPSSession: # optional
           # # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
@@ -41,27 +48,22 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -input=false
-        working-directory: parent
 
       - name: Terraform FMT
         run: terraform fmt
         continue-on-error: true
-        working-directory: parent
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        working-directory: parent
       
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color -input=false
         continue-on-error: true
-        working-directory: parent
 
       - name: Terraform Apply
         id: apply
         run: terraform apply -auto-approve
-        working-directory: parent
 
       

@@ -5,5 +5,5 @@ dns-prefix = "manocluster"
 pool-name  = "agentpool"
 node-count = 1
 vm-size    = "standard_a2m_v2"
-acr-name   = "manoacr6163"
+acr-name   = "manoacr616312"
 sku        = "Standard"
